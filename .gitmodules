@@ -1,0 +1,3 @@
+[submodule "app/External/docker-php-client"]
+	path = app/External/docker-php-client
+	url = https://github.com/Metratrj/docker-php-client.git
