@@ -1,3 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Container Liste</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background: #0d1117;
+            color: #fff;
+
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 0.5em; border: 1px solid #ccc; }
+        .status-running { color: green; font-weight: bold; }
+        .status-exited { color: red; font-weight: bold; }
+        button { margin: 0 0.2em; }
+    </style>
+</head>
+<body>
+
 <?php
 
 use App\Controllers\ContainerController;
@@ -54,7 +81,6 @@ function renderNestedList($data): string {
 
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
-echo $requestUri;
 if ($requestUri === '/containers') {
     (new ContainerController())->index();
     exit;
@@ -82,3 +108,8 @@ if ($requestMethod === 'POST' && preg_match('@^/containers/([^/]+)/delete$@', $r
 
 http_response_code(404);
 echo "404 Not Found";
+
+?>
+
+</body>
+</html>

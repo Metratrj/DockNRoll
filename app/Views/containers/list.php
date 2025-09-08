@@ -1,21 +1,6 @@
 <?php
 /** @var \OpenAPI\Client\Model\ContainerSummary[] $containers */
 ?>
-
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Container Liste</title>
-    <style>
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 0.5em; border: 1px solid #ccc; }
-        .status-running { color: green; font-weight: bold; }
-        .status-exited { color: red; font-weight: bold; }
-        button { margin: 0 0.2em; }
-    </style>
-</head>
-<body>
 <h1>Container Übersicht</h1>
 <table>
     <thead>
@@ -28,9 +13,7 @@
     </tr>
     </thead>
     <tbody>
-    <?php
-    var_dump($containers);
-    foreach ($containers as $ctr): ?>
+    <?php foreach ($containers as $ctr): ?>
         <tr>
             <td><?= htmlspecialchars($ctr->getNames()[0]) ?></td>
             <td><?= htmlspecialchars($ctr->getImage()) ?></td>
@@ -59,5 +42,3 @@
     <?php endforeach; ?>
     </tbody>
 </table>
-</body>
-</html>

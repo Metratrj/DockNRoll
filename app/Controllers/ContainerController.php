@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Services\ContainerService;
+use App\Utils\View;
 
 class ContainerController
 {
@@ -15,7 +16,8 @@ class ContainerController
 
     public function index(): void {
         $containers = $this->service->containerList();
-        include __DIR__ . '/../Views/containers/list.php';
+        View::render(__DIR__.'/../Views/containers/list.php', ['containers' => $containers]);
+        // include __DIR__ . '/../Views/containers/list.php';
     }
 
     public function start(string $id): void {
