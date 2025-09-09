@@ -1,5 +1,8 @@
 <?php
-/** @var \OpenAPI\Client\Model\ContainerSummary[] $containers */
+/** @var ContainerSummary[] $containers */
+
+use OpenAPI\Client\Model\ContainerSummary;
+
 ?>
 <h1>Container Übersicht</h1>
 <table>
@@ -15,7 +18,7 @@
     <tbody>
     <?php foreach ($containers as $ctr): ?>
         <tr>
-            <td><?= htmlspecialchars($ctr->getNames()[0]) ?></td>
+            <td><a href="/containers/<?= $ctr->getId() ?>"><?= htmlspecialchars($ctr->getNames()[0]) ?></a></td>
             <td><?= htmlspecialchars($ctr->getImage()) ?></td>
             <td class="status-<?= strtolower($ctr->getState()) ?>"><?= htmlspecialchars($ctr->getState()) ?></td>
             <td>

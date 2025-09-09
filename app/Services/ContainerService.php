@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use OpenAPI\Client\Api\ContainerApi;
 use OpenAPI\Client\ApiException;
 use OpenAPI\Client\Configuration;
+use OpenAPI\Client\Model\ContainerStatsResponse;
 use OpenAPI\Client\Model\ContainerSummary;
 
 class ContainerService
@@ -35,6 +36,18 @@ class ContainerService
         return $list;
     }
 
+    public function containerStats(string $id): ContainerStatsResponse
+    {
+        $result = new ContainerStatsResponse();
+        try {
+            $result = $this->service->containerStats($id);
+        } catch (ApiException $e) {
+            echo 'Exception when calling ContainerApi->containerStats: ', $e->getMessage(), PHP_EOL;
+        }
+
+        return $result;
+    }
+
     public function containerStart(string $id): void {
         try {
             $this->service->containerStart($id);
@@ -47,9 +60,8 @@ class ContainerService
     public function containerStop(string $id): void {
         try {
             $this->service->containerStop($id);
-        }
-        catch (ApiException $e) {
-            echo 'Exception when calling ContainerApi->containerStart: ', $e->getMessage(), PHP_EOL;
+        } catch (ApiException $e) {
+            echo 'Exception when calling ContainerApi->containerStop: ', $e->getMessage(), PHP_EOL;
         }
     }
 }

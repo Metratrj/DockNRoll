@@ -1,0 +1,48 @@
+*, ::after, ::before, ::backdrop, ::file-selector-button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0 solid;
+}
+
+
+
+/*
+
+.sidebar nav a .icon {
+    margin-right: 6px;
+}
+
+
+
+.sidebar nav a {
+    display: block;
+    color: #bbb;
+    padding: 0.5rem 0;
+    text-decoration: none;
+}
+
+.sidebar nav a:hover {
+    color: #fff;
+}
+
+.content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    background: #1f1f1f;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+*/

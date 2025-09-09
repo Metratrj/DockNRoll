@@ -2,8 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Http\Request;
+use App\Http\Response;
+use App\Http\View;
 use App\Services\ContainerService;
-use App\Utils\View;
 
 class ContainerController
 {
@@ -16,17 +18,22 @@ class ContainerController
 
     public function index(): void {
         $containers = $this->service->containerList();
-        View::render(__DIR__.'/../Views/containers/list.php', ['containers' => $containers]);
-        // include __DIR__ . '/../Views/containers/list.php';
+        View::render('containers/list', ['containers' => $containers]);
     }
 
-    public function start(string $id): void {
+    public function show(Request $request, Response $response, string $id): void {
+        $stats = $this->service->containerStats($id);
+        View::render('containers/show', ['stats' => $stats]);
+
+    }
+
+    public function start(Request $request, Response $response, string $id): void {
         $this->service->containerStart($id);
-        header('Location: /containers');
+        $response->setStatus(302)->setHeader('Location', '/containers')->send();
     }
 
-    public function stop(string $id): void {
+    public function stop(Request $request, Response $response, string $id): void {
         $this->service->containerStop($id);
-        header('Location: /containers');
+        $response->setStatus(302)->setHeader('Location', '/containers')->send();
     }
 }
