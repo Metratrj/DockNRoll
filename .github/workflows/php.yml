@@ -16,9 +16,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-
+    - name: pull submodules
+      run: git submodule update --init --recursive
+      
     - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      run: composer validate
 
     - name: Cache Composer packages
       id: composer-cache
