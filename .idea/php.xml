@@ -29,7 +29,7 @@
   </component>
   <component name="PhpCodeSniffer">
     <phpcs_settings>
-      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="0cd98249-b688-4d75-a570-ab60ff811064" timeout="30000" />
+      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="0cd98249-b688-4d75-a570-ab60ff811064" tool_path="C:/xampp/htdocs/DockNRoll/vendor/bin/phpcs.bat" timeout="30000" />
     </phpcs_settings>
   </component>
   <component name="PhpIncludePathManager">
@@ -111,6 +111,7 @@
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phpunit/php-text-template" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

@@ -13,7 +13,8 @@
     "php": "^8.2",
     "guzzlehttp/guzzle": "^7.10",
     "guzzlehttp/psr7": "^2.8",
-    "metratrj/docker-php-client": "dev-main as 1.0.0"
+    "metratrj/docker-php-client": "dev-main as 1.0.0",
+    "squizlabs/php_codesniffer": "^3.13"
   },
   "autoload": {
     "psr-4": {
