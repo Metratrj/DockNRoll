@@ -13,10 +13,10 @@ $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="bg-gray-950 text-white scheme-dark">
+  <body class="bg-gray-950 !text-white scheme-dark">
     <div class="wrapper flex h-screen overflow-hidden">
       <aside
-        class="sidebar fixed static top-0 left-0 z-9999 flex h-screen w-[290px] translate-x-0 flex-col overflow-y-hidden border-r border-gray-800 bg-black px-5"
+        class="sidebar static top-0 left-0 z-9999 flex h-screen w-[290px] translate-x-0 flex-col overflow-y-hidden border-r border-gray-800 bg-black px-5"
       >
         <div class="sidebar-header flex items-center pb-7">
           <a href="/">
@@ -37,9 +37,9 @@ $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
               <li>
                 <a
                   href="<?= $item['path'] ?>"
-                  class="menu-item group <?= $current_path == $item['path'] ? 'menu-item-active' : 'menu-item-inactive' ?>"
+                  class="group <?= $current_path == $item['path'] ? 'menu-item-active' : 'menu-item-inactive' ?> menu-item"
                 >
-                  <span class="menu-item-text">
+                  <span class="menu-item-text inline">
                     <?= htmlspecialchars($item['label']) ?>
                   </span>
                 </a>
@@ -50,7 +50,30 @@ $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
           </nav>
         </div>
       </aside>
-      <main class="content">
+      <main
+        class="content relative flex flex-1 flex-col overflow-x-hidden overflow-y-auto"
+      >
+        <header
+          class="sticky top-0 z-99999 flex w-full border-b border-gray-800 bg-gray-900"
+        >
+          <div class="flex grow flex-row items-center justify-between px-6">
+            <div
+              class="flex w-full items-center justify-normal gap-2 border-b border-gray-800 px-3 py-4"
+            >
+              Hello
+            </div>
+            <div class="flex w-full items-center justify-end gap-4 px-5 py-4">
+              <div class="relative">
+                <a class="flex items-center text-gray-400">
+                  <div
+                    class="mr-3 h-11 w-11 overflow-hidden rounded-full"
+                  ></div>
+                  <span class="mr-1 block font-medium"> USER NAME </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
         <?php /** @var string $view_file */ include $view_file; ?>
       </main>
     </div>
