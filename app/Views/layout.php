@@ -7,9 +7,8 @@ $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 <html lang="de">
   <head>
     <title><?= htmlspecialchars($title ?? 'Dock’n’Roll') ?></title>
-    <link rel="stylesheet" href="css/style.css" />
+    <!--<link rel="stylesheet" href="css/style.css" />-->
     <link rel="stylesheet" href="css/out.css" />
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
@@ -58,11 +57,21 @@ $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         >
           <div class="flex grow flex-row items-center justify-between px-6">
             <div
-              class="flex w-full items-center justify-normal gap-2 border-b border-gray-800 px-3 py-4"
+              class="flex w-full items-center justify-normal gap-2 border-gray-800 px-3 py-4"
             >
               Hello
             </div>
             <div class="flex w-full items-center justify-end gap-4 px-5 py-4">
+              <!-- NOTIFICATIONS -->
+              <div class="relative">
+                <button
+                  class="relative flex h-11 w-11 items-center justify-center rounded-full border border-gray-400 bg-gray-900 text-gray-400 transition-colors hover:bg-gray-800 hover:text-white"
+                >
+                  H
+                </button>
+              </div>
+
+              <!-- USER AREA -->
               <div class="relative">
                 <a class="flex items-center text-gray-400">
                   <div
