@@ -1,0 +1,14 @@
+{
+  "plugins": ["prettier-plugin-tailwindcss","@prettier/plugin-php"],
+  "tailwindStylesheet": "./public/css/style.css",
+  "tailwindAttributes": ["class", "className", "ngClass"],
+  "tailwindFunctions": ["tw"],
+  "overrides": [
+    {
+      "files": ["*.php", "*.html"],
+      "options": {
+        "parser": "php"
+      }
+    }
+  ]
+}

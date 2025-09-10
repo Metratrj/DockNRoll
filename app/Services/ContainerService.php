@@ -40,11 +40,10 @@ class ContainerService
     {
         $result = new ContainerStatsResponse();
         try {
-            $result = $this->service->containerStats($id);
+            $result = $this->service->containerStats($id, false);
         } catch (ApiException $e) {
             echo 'Exception when calling ContainerApi->containerStats: ', $e->getMessage(), PHP_EOL;
         }
-
         return $result;
     }
 
