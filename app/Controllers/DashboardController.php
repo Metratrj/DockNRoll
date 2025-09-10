@@ -8,7 +8,8 @@ use App\Services\SystemService;
 class DashboardController
 {
     private SystemService $service;
-    public function __construct(SystemService $service = new SystemService()) {
+    public function __construct(SystemService $service = new SystemService())
+    {
         $this->service = $service;
     }
 

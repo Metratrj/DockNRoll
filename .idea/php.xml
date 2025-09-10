@@ -7,11 +7,6 @@
       </laravel_pint_by_interpreter>
     </laravel_pint_settings>
   </component>
-  <component name="MessDetector">
-    <phpmd_settings>
-      <phpmd_by_interpreter asDefaultInterpreter="true" interpreter_id="0cd98249-b688-4d75-a570-ab60ff811064" timeout="30000" />
-    </phpmd_settings>
-  </component>
   <component name="MessDetectorOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>
@@ -22,6 +17,7 @@
     <option name="highlightLevel" value="WARNING" />
     <option name="transferred" value="true" />
   </component>
+  <component name="PhpAnalysisConfiguration" call_tree_analysis_depth="3" />
   <component name="PhpCSFixer">
     <phpcsfixer_settings>
       <phpcs_fixer_by_interpreter asDefaultInterpreter="true" interpreter_id="0cd98249-b688-4d75-a570-ab60ff811064" timeout="30000" />
@@ -29,89 +25,89 @@
   </component>
   <component name="PhpCodeSniffer">
     <phpcs_settings>
-      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="0cd98249-b688-4d75-a570-ab60ff811064" tool_path="C:/xampp/htdocs/DockNRoll/vendor/bin/phpcs.bat" timeout="30000" />
+      <PhpCSConfiguration beautifier_path="$PROJECT_DIR$/vendor/bin/phpcbf" tool_path="$PROJECT_DIR$/vendor/bin/phpcs" />
     </phpcs_settings>
   </component>
   <component name="PhpIncludePathManager">
     <include_path>
-      <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
-      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
-      <path value="$PROJECT_DIR$/vendor/metratrj/docker-php-client" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/clue/ndjson-react" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phar-io/version" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/fidry/cpu-core-counter" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phar-io/manifest" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/composer" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/doctrine/instantiator" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/event-dispatcher" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/http-factory" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/friendsofphp/php-cs-fixer" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/http-client" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/evenement/evenement" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/guzzlehttp/promises" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/guzzlehttp/psr7" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/fidry/cpu-core-counter" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/friendsofphp/php-cs-fixer" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/guzzlehttp/guzzle" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/stopwatch" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/options-resolver" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-intl-grapheme" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/event-dispatcher" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-intl-normalizer" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/ralouphie/getallheaders" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-php81" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-ctype" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/dns" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/promise" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/socket" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/filesystem" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/type" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/stream" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/event-dispatcher-contracts" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/diff" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/myclabs/deep-copy" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/process" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/lines-of-code" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/child-process" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/object-enumerator" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/event-loop" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/comparator" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/code-unit" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/exporter" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/cli-parser" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/version" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/complexity" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/recursion-context" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/resource-operations" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/environment" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/theseer/tokenizer" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/global-state" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/code-unit-reverse-lookup" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phpunit/php-code-coverage" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phpunit/php-file-iterator" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phpunit/php-invoker" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phpunit/php-text-template" />
-      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/child-process" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/app/External/docker-php-client/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/metratrj/docker-php-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

@@ -8,17 +8,20 @@ class Response
     private array $headers = [];
     private int $status = 0;
 
-    public function setStatus(int $status): self {
+    public function setStatus(int $status): self
+    {
         $this->status = $status;
         return $this;
     }
 
-    public function setBody(string $body): self {
+    public function setBody(string $body): self
+    {
         $this->body = $body;
         return $this;
     }
 
-    public function setHeader(string $header, string $value): self {
+    public function setHeader(string $header, string $value): self
+    {
         $this->headers[$header] = $value;
         return $this;
     }
@@ -29,15 +32,18 @@ class Response
         return $this;
     }
 
-    public function getBody(): string {
+    public function getBody(): string
+    {
         return $this->body;
     }
 
-    public function getHeaders(): array {
+    public function getHeaders(): array
+    {
         return $this->headers;
     }
 
-    public function getStatus(): int {
+    public function getStatus(): int
+    {
         return $this->status;
     }
 
@@ -48,7 +54,8 @@ class Response
         $this->send();
     }
 
-    public function send(): void {
+    public function send(): void
+    {
         if ($this->status) {
             http_response_code($this->status);
         }

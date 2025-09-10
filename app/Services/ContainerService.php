@@ -13,7 +13,8 @@ class ContainerService
 {
     private ContainerApi $service;
 
-    public function __construct(string $host = 'http://localhost:2375') {
+    public function __construct(string $host = 'http://localhost:2375')
+    {
         $guzzle = new Client([
             'base_uri' => $host,
             'timeout' => 5,
@@ -25,12 +26,12 @@ class ContainerService
     /**
      * @return ContainerSummary[]
      */
-    public function containerList(bool $all = true): array {
+    public function containerList(bool $all = true): array
+    {
         $list = [];
         try {
             $list = $this->service->containerList($all);
-        }
-        catch (ApiException $e) {
+        } catch (ApiException $e) {
             echo 'Exception when calling ContainerApi->containerCreate: ', $e->getMessage(), PHP_EOL;
         }
         return $list;
@@ -47,16 +48,17 @@ class ContainerService
         return $result;
     }
 
-    public function containerStart(string $id): void {
+    public function containerStart(string $id): void
+    {
         try {
             $this->service->containerStart($id);
-        }
-        catch (ApiException $e) {
+        } catch (ApiException $e) {
             echo 'Exception when calling ContainerApi->containerStart: ', $e->getMessage(), PHP_EOL;
         }
     }
 
-    public function containerStop(string $id): void {
+    public function containerStop(string $id): void
+    {
         try {
             $this->service->containerStop($id);
         } catch (ApiException $e) {

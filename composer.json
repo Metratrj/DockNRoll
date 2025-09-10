@@ -21,5 +21,9 @@
       "App\\": "app/",
       "DockerClient\\": "app/External/docker-php-client/lib/"
     }
+  },
+  "scripts": {
+    "cs": "phpcs",
+    "cbf": "phpcbf"
   }
 }

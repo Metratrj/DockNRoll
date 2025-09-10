@@ -4,14 +4,15 @@ namespace App\Http;
 
 class Request
 {
-    public function __construct(public string $uri,
-                                public string $method,
-                                public array $get,
-                                public array $post,
-                                public array $files,
-                                public array $cookie,
-                                public array $server)
-    {
+    public function __construct(
+        public string $uri,
+        public string $method,
+        public array $get,
+        public array $post,
+        public array $files,
+        public array $cookie,
+        public array $server
+    ) {
     }
 
     public function getMethod(): string

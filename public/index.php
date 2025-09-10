@@ -23,5 +23,3 @@ $router->post('/containers/{id}/stop', [ContainerController::class, 'stop']);
 $request = Request::createFromGlobals();
 $response = new Response();
 $router->dispatch($request, $response);
-
-?>

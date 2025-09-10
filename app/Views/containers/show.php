@@ -1,4 +1,5 @@
 <?php
+
 /** @var ContainerStatsResponse $stats */
 
 use OpenAPI\Client\Model\ContainerStatsResponse;

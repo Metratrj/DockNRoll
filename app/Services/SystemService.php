@@ -13,7 +13,8 @@ class SystemService
 {
     private SystemApi $service;
 
-    public function __construct(string $host = 'http://localhost:2375') {
+    public function __construct(string $host = 'http://localhost:2375')
+    {
         $guzzle = new Client([
             'base_uri' => $host,
             'timeout' => 5,
@@ -22,7 +23,8 @@ class SystemService
         $this->service = new SystemApi($guzzle, $config);
     }
 
-    public function systemInfo(): SystemInfo {
+    public function systemInfo(): SystemInfo
+    {
         $result = new SystemInfo();
         try {
             $result = $this->service->systemInfo();
@@ -32,12 +34,14 @@ class SystemService
         return $result;
     }
 
-    public function systemDataUsage(): SystemDataUsageResponse {
+    public function systemDataUsage(): SystemDataUsageResponse
+    {
         $result = new SystemDataUsageResponse();
         try {
             $result = $this->service->systemDataUsage();
         } catch (ApiException $e) {
-            echo 'Exception when calling SystemApi->systemDataUsage: ', $e->getMessage(), PHP_EOL;        }
+            echo 'Exception when calling SystemApi->systemDataUsage: ', $e->getMessage(), PHP_EOL;
+        }
         return $result;
     }
 }

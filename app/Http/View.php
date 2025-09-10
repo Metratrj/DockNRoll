@@ -4,7 +4,8 @@ namespace App\Http;
 
 class View
 {
-    public static function render(string $template, array $data = []): void {
+    public static function render(string $template, array $data = []): void
+    {
         extract($data, EXTR_SKIP);
         $view_file = __DIR__ . "/../Views/{$template}.php";
 
