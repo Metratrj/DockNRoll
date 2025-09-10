@@ -9,6 +9,7 @@ $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     <title><?= htmlspecialchars($title ?? 'Dock’n’Roll') ?></title>
     <!--<link rel="stylesheet" href="css/style.css" />-->
     <link rel="stylesheet" href="css/out.css" />
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
@@ -67,7 +68,15 @@ $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
                 <button
                   class="relative flex h-11 w-11 items-center justify-center rounded-full border border-gray-400 bg-gray-900 text-gray-400 transition-colors hover:bg-gray-800 hover:text-white"
                 >
-                  H
+                  <span
+                    class="absolute top-0.5 right-0 z-1 flex h-2 w-2 rounded-full bg-orange-400"
+                  >
+                    <span
+                      class="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75"
+                    >
+                    </span>
+                  </span>
+                  <i class="fa-regular fa-bell fa-lg"></i>
                 </button>
               </div>
 

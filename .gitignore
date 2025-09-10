@@ -93,3 +93,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 docker
+public/assets
