@@ -1,4 +1,8 @@
 <?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2025.
+  -->
+
 <ruleset name="Dock-n-Roll">
     <description>Dock-n-Roll coding standard</description>
 
@@ -11,5 +15,16 @@
     <arg name="colors"/>
     <arg value="p"/>
 
-    <rule ref="PSR12"/>
+    <rule ref="PSR12">
+        <!-- Braces on same line for classes and methods -->
+        <exclude name="PSR12.Classes.ClassDeclaration.OpenBraceNewLine"/>
+        <exclude name="PSR12.Methods.MethodDeclaration.OpenBraceNewLine"/>
+
+        <!-- Allow more flexible argument lists -->
+        <exclude name="PSR12.Functions.FunctionCallSignature.MultipleArguments"/>
+    </rule>
+
+    <rule ref="Generic.Files.LineLength">
+        <exclude-pattern>app/Views/*</exclude-pattern>
+    </rule>
 </ruleset>
