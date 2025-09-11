@@ -1,13 +1,19 @@
 <?php
+/*
+ * Copyright (c) 2025.
+ */
+
 $menu = require __DIR__ . "/../../config/menu.php";
-$current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$current_path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 ?>
 
 <!DOCTYPE html>
 <html lang="de">
   <head>
-    <title><?= htmlspecialchars($title ?? 'Dock’n’Roll') ?></title>
-    <link rel="stylesheet" href="/css/out.css" />
+    <title><?= htmlspecialchars($title ?? "Dock’n’Roll") ?></title>
+    <!--suppress HtmlUnknownTarget -->
+      <link rel="stylesheet" href="/css/out.css" />
+      <!--suppress HtmlUnknownTarget -->
     <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,19 +38,18 @@ $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
               </h3>
             </div>
             <ul class="mb-6 flex flex-col gap-4">
-              <?php foreach ($menu as $item) : ?>
-              <li>
-                <a
-                  href="<?= $item['path'] ?>"
-                  class="group <?= $current_path == $item['path'] ? 'menu-item-active' : 'menu-item-inactive' ?> menu-item"
-                >
-                  <span class="menu-item-text inline">
-                    <?= htmlspecialchars($item['label']) ?>
-                  </span>
-                </a>
-              </li>
-
-              <?php endforeach; ?>
+              <?php foreach ($menu as $item) {
+                  $activeClass =
+                    $current_path == $item["path"]
+                        ? "menu-item-active"
+                        : "menu-item-inactive";
+                  echo sprintf(
+                      '<li><a href="%s" class="group %s menu-item"><span class="menu-item-text inline">%s</span></a></li>',
+                      $item["path"],
+                      $activeClass,
+                      htmlspecialchars($item["label"])
+                  );
+              } ?>
             </ul>
           </nav>
         </div>
@@ -93,7 +98,7 @@ $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         </header>
         <main>
           <div class="max-w-(1500px) mx-auto p-6">
-            <?php /** @var string $view_file */ include $view_file; ?>
+            <?php /** @var string $view_file */ include_once $view_file; ?>
           </div>
         </main>
       </div>

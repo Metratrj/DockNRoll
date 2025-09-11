@@ -1,11 +1,18 @@
 <?php
+/*
+ * Copyright (c) 2025.
+ */
 
 /** @var ContainerStatsResponse $stats */
 
 use OpenAPI\Client\Model\ContainerStatsResponse;
 
 ?>
-<h1>Container <?php $stats->getName() ?></h1>
-<?php foreach ($stats as $stat) { echo '
-<h2>' . $stat . '</h2>
-'; }
+<h1>Container <?php $stats->getName(); ?></h1>
+<?php foreach ($stats as $stat) {
+    echo '
+<h2>' .
+        $stat .
+        '</h2>
+';
+}

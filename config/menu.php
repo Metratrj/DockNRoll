@@ -1,12 +1,15 @@
 <?php
+/*
+ * Copyright (c) 2025.
+ */
 
 return [
     [
-        'label' => 'Dashboard',
-        'path' => '/'
+        "label" => "Dashboard",
+        "path" => "/",
     ],
     [
-        'label' => 'Containers',
-        'path' => '/containers'
-    ]
+        "label" => "Containers",
+        "path" => "/containers",
+    ],
 ];

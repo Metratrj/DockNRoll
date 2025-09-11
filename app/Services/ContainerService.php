@@ -1,4 +1,7 @@
 <?php
+/*
+ * Copyright (c) 2025.
+ */
 
 namespace App\Services;
 
@@ -13,11 +16,11 @@ class ContainerService
 {
     private ContainerApi $service;
 
-    public function __construct(string $host = 'http://localhost:2375')
+    public function __construct(string $host = "http://localhost:2375")
     {
         $guzzle = new Client([
-            'base_uri' => $host,
-            'timeout' => 5,
+            "base_uri" => $host,
+            "timeout" => 5,
         ]);
         $config = Configuration::getDefaultConfiguration()->setHost($host);
         $this->service = new ContainerApi($guzzle, $config);
@@ -32,7 +35,9 @@ class ContainerService
         try {
             $list = $this->service->containerList($all);
         } catch (ApiException $e) {
-            echo 'Exception when calling ContainerApi->containerCreate: ', $e->getMessage(), PHP_EOL;
+            echo "Exception when calling ContainerApi->containerCreate: ",
+            $e->getMessage(),
+            PHP_EOL;
         }
         return $list;
     }
@@ -43,7 +48,9 @@ class ContainerService
         try {
             $result = $this->service->containerStats($id, false);
         } catch (ApiException $e) {
-            echo 'Exception when calling ContainerApi->containerStats: ', $e->getMessage(), PHP_EOL;
+            echo "Exception when calling ContainerApi->containerStats: ",
+            $e->getMessage(),
+            PHP_EOL;
         }
         return $result;
     }
@@ -53,7 +60,9 @@ class ContainerService
         try {
             $this->service->containerStart($id);
         } catch (ApiException $e) {
-            echo 'Exception when calling ContainerApi->containerStart: ', $e->getMessage(), PHP_EOL;
+            echo "Exception when calling ContainerApi->containerStart: ",
+            $e->getMessage(),
+            PHP_EOL;
         }
     }
 
@@ -62,7 +71,9 @@ class ContainerService
         try {
             $this->service->containerStop($id);
         } catch (ApiException $e) {
-            echo 'Exception when calling ContainerApi->containerStop: ', $e->getMessage(), PHP_EOL;
+            echo "Exception when calling ContainerApi->containerStop: ",
+            $e->getMessage(),
+            PHP_EOL;
         }
     }
 }

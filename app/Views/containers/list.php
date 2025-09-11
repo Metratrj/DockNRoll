@@ -1,4 +1,7 @@
 <?php
+/*
+ * Copyright (c) 2025.
+ */
 
 /** @var ContainerSummary[] $containers */
 
@@ -61,13 +64,12 @@ use OpenAPI\Client\Model\ContainerSummary;
                 </td>
                 <td><?= htmlspecialchars($ctr->getImage()) ?></td>
                 <td class="status-<?= strtolower($ctr->getState()) ?>">
-                  <?= htmlspecialchars($ctr->getState()) ?>
+                    <?= htmlspecialchars($ctr->getState()) ?>
                 </td>
                 <td>
-                  <?php foreach ($ctr->getPorts() as $p) : ?> <?=
-                  ($p->getPublicPort() ?? '') . ' → ' . ($p->getPrivatePort() ??
-                  '') ?><br />
-                  <?php endforeach; ?>
+                    <?php foreach ($ctr->getPorts() as $p) : ?>
+                        <?php echo ($p->getPublicPort() ?? '') . ' → ' . ($p->getPrivatePort() ?? ''); ?><br />
+                    <?php endforeach; ?>
                 </td>
                 <td>
                   <form

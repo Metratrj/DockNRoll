@@ -1,6 +1,4 @@
 <section class="dashboard">
-  <!--<h1>Willkommen, <?php /*= htmlspecialchars($_SESSION['username'] ?? 'User') */ ?>!</h1>
--->
   <div class="grid grid-cols-12 gap-6">
     <div class="col-span-7 space-y-6">
       <div class="grid grid-cols-2 gap-6">
@@ -21,19 +19,19 @@
     <div class="cards">
       <div class="card">
         <h2>Running Containers</h2>
-        <p><?= $stats['containers_running'] ?? 0 ?></p>
+        <p><?= $stats["containers_running"] ?? 0 ?></p>
       </div>
       <div class="card">
         <h2>Images</h2>
-        <p><?= $stats['images'] ?? 0 ?></p>
+        <p><?= $stats["images"] ?? 0 ?></p>
       </div>
       <div class="card">
         <h2>Volumes</h2>
-        <p><?= $stats['volumes'] ?? 0 ?></p>
+        <p><?= $stats["volumes"] ?? 0 ?></p>
       </div>
       <div class="card">
         <h2>Audit-Logs (letzte 24h)</h2>
-        <p><?= $stats['audit_logs'] ?? 0 ?></p>
+        <p><?= $stats["audit_logs"] ?? 0 ?></p>
       </div>
     </div>
   </div>

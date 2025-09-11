@@ -1,4 +1,7 @@
 <?php
+/*
+ * Copyright (c) 2025.
+ */
 
 namespace App\Http;
 
@@ -49,7 +52,7 @@ class Response
 
     public function json(array $data): void
     {
-        $this->setHeader('Content-Type', 'application/json');
+        $this->setHeader("Content-Type", "application/json");
         $this->setBody(json_encode($data));
         $this->send();
     }
