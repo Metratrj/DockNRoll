@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2025.
  */
@@ -28,11 +29,8 @@ class Router
         $this->addRoute("DELETE", $path, $handler);
     }
 
-    private function addRoute(
-        string $method,
-        string $path,
-        callable|array $handler,
-    ): void {
+    private function addRoute(string $method, string $path, callable|array $handler): void
+    {
         $this->routes[$method][$path] = $handler;
     }
 
@@ -48,16 +46,9 @@ class Router
         }
 
         foreach ($this->routes[$method] ?? [] as $route => $handler) {
-            $pattern =
-                "@^" .
-                preg_replace("/\{([a-zA-Z0-9_]+)\}/", '(?P<$1>[^/]+)', $route) .
-                "$@";
+            $pattern = "@^" . preg_replace("/\{([a-zA-Z0-9_]+)\}/", '(?P<$1>[^/]+)', $route) . "$@";
             if (preg_match($pattern, $uri, $matches)) {
-                $params = array_filter(
-                    $matches,
-                    "is_string",
-                    ARRAY_FILTER_USE_KEY,
-                );
+                $params = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
                 $this->invokeHandler($handler, $request, $response, $params);
                 return;
             }
@@ -67,12 +58,8 @@ class Router
         $response->setStatus(404)->setBody("404 Not Found")->send();
     }
 
-    private function invokeHandler(
-        $handler,
-        Request $req,
-        Response $res,
-        array $params = [],
-    ): void {
+    private function invokeHandler($handler, Request $req, Response $res, array $params = []): void
+    {
         if (is_array($handler)) {
             [$class, $method] = $handler;
             $controller = new $class();

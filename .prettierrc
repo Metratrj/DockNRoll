@@ -2,5 +2,16 @@
   "plugins": ["prettier-plugin-tailwindcss", "@prettier/plugin-php"],
   "tailwindStylesheet": "./public/css/style.css",
   "tailwindAttributes": ["class", "className", "ngClass"],
-  "tailwindFunctions": ["tw"]
+  "tailwindFunctions": ["tw"],
+  "printWidth": 120,
+  "bracketSameLine": true,
+  "bracketSpacing": true,
+  "overrides": [
+    {
+      "files": "app/Views/**/*.php",
+      "options": {
+        "parser": "html"
+      }
+    }
+  ]
 }

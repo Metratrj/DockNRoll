@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2025.
  */
@@ -14,9 +15,8 @@ class ContainerController
 {
     private ContainerService $service;
 
-    public function __construct(
-        ContainerService $service = new ContainerService(),
-    ) {
+    public function __construct(ContainerService $service = new ContainerService())
+    {
         $this->service = $service;
     }
 
@@ -32,11 +32,8 @@ class ContainerController
         View::render("containers/show", ["stats" => $stats]);
     }
 
-    public function start(
-        Request $request,
-        Response $response,
-        string $id,
-    ): void {
+    public function start(Request $request, Response $response, string $id): void
+    {
         $this->service->containerStart($id);
         $response->setStatus(302)->setHeader("Location", "/containers")->send();
     }

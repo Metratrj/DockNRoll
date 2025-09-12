@@ -1,5 +1,26 @@
+/*
+ * Copyright (c) 2025.
+ */
+
 @import "tailwindcss";
 @custom-variant dark (&:is(.dark *));
+
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1; /* fix for Chrome */
+}
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+
+@theme {
+  --font-sans: InterVariable, sans-serif;
+  --font-sans--font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
 
 body {
   width: 100vw;
@@ -16,4 +37,30 @@ body {
 
 @utility menu-item-inactive {
   @apply text-gray-300 hover:bg-white/10 hover:text-gray-300;
+}
+
+.badge-running {
+  @apply bg-[#12b76a]/15 text-[#12b76a];
+}
+
+.badge-exited {
+  @apply bg-red-500/10 text-red-500;
+  /*@apply bg-[#f04438]/15 text-[#f04438];*/
+}
+
+.tabl {
+  thead {
+    tr {
+      @apply border-b border-gray-800;
+      th {
+        @apply px-5 py-3;
+        div {
+          @apply flex items-center;
+          p {
+            @apply font-medium text-gray-400;
+          }
+        }
+      }
+    }
+  }
 }

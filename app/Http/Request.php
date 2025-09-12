@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2025.
  */
@@ -15,8 +16,7 @@ class Request
         public array $files,
         public array $cookie,
         public array $server,
-    ) {
-    }
+    ) {}
 
     public function getMethod(): string
     {

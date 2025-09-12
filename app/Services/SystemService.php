@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2025.
  */
@@ -32,9 +33,7 @@ class SystemService
         try {
             $result = $this->service->systemInfo();
         } catch (ApiException $e) {
-            echo "Exception when calling SystemApi->systemInfo: ",
-            $e->getMessage(),
-            PHP_EOL;
+            echo "Exception when calling SystemApi->systemInfo: ", $e->getMessage(), PHP_EOL;
         }
         return $result;
     }
@@ -45,9 +44,7 @@ class SystemService
         try {
             $result = $this->service->systemDataUsage();
         } catch (ApiException $e) {
-            echo "Exception when calling SystemApi->systemDataUsage: ",
-            $e->getMessage(),
-            PHP_EOL;
+            echo "Exception when calling SystemApi->systemDataUsage: ", $e->getMessage(), PHP_EOL;
         }
         return $result;
     }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2025.
  */
@@ -35,9 +36,7 @@ class ContainerService
         try {
             $list = $this->service->containerList($all);
         } catch (ApiException $e) {
-            echo "Exception when calling ContainerApi->containerCreate: ",
-            $e->getMessage(),
-            PHP_EOL;
+            echo "Exception when calling ContainerApi->containerCreate: ", $e->getMessage(), PHP_EOL;
         }
         return $list;
     }
@@ -48,9 +47,7 @@ class ContainerService
         try {
             $result = $this->service->containerStats($id, false);
         } catch (ApiException $e) {
-            echo "Exception when calling ContainerApi->containerStats: ",
-            $e->getMessage(),
-            PHP_EOL;
+            echo "Exception when calling ContainerApi->containerStats: ", $e->getMessage(), PHP_EOL;
         }
         return $result;
     }
@@ -60,9 +57,7 @@ class ContainerService
         try {
             $this->service->containerStart($id);
         } catch (ApiException $e) {
-            echo "Exception when calling ContainerApi->containerStart: ",
-            $e->getMessage(),
-            PHP_EOL;
+            echo "Exception when calling ContainerApi->containerStart: ", $e->getMessage(), PHP_EOL;
         }
     }
 
@@ -71,9 +66,7 @@ class ContainerService
         try {
             $this->service->containerStop($id);
         } catch (ApiException $e) {
-            echo "Exception when calling ContainerApi->containerStop: ",
-            $e->getMessage(),
-            PHP_EOL;
+            echo "Exception when calling ContainerApi->containerStop: ", $e->getMessage(), PHP_EOL;
         }
     }
 }
