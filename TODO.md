@@ -8,17 +8,17 @@ Dieses Dokument listet den Status der Implementierung der globalen Such- und Bef
 ## 2. Architektur & Kernkomponenten
 
 ### 2.1. Caching-Service (Backend)
-- **Technologie:** Redis (Umgesetzt)
+- **Technologie:** Redis mit RediSearch (Umgesetzt)
 - **Worker/Crawler:** Hintergrundprozess zum Abfragen der Docker-API und Speichern in Redis (Umgesetzt)
-  - Speicherungs-Struktur in Redis (Hashes für Objekte, Sets für Indizes) (Umgesetzt)
-  - Infix-Indexierung (alle Substrings) für bessere Suche (Umgesetzt)
-- **Zukünftige Optimierung:** RediSearch-Modul evaluieren (Offen)
+  - Speicherungs-Struktur in Redis (JSON-Dokumente) (Umgesetzt)
+  - Volltext-Indexierung des gesamten Objekts (Umgesetzt)
+- **Zukünftige Optimierung:** RediSearch-Modul evaluieren (Erledigt)
 
 ### 2.2. Such-API (Backend)
 - **Endpunkt:** `POST /api/search` (Umgesetzt)
 - **Controller:** `SearchController` (Umgesetzt)
-- **Logik:** Abfrage des Redis-Caches, Tokenisierung der Suchanfrage, Schnittmengenbildung (Umgesetzt)
-- **Sortierung:** Relevanz-Sortierung der Ergebnisse (Umgesetzt)
+- **Logik:** Abfrage des RediSearch-Index (Umgesetzt)
+- **Sortierung:** Relevanz-Sortierung durch RediSearch-Gewichtung (Umgesetzt)
 
 ### 2.3. Befehls-API (Backend)
 - **Endpunkt:** `POST /api/command` (Umgesetzt)
@@ -39,10 +39,10 @@ Dieses Dokument listet den Status der Implementierung der globalen Such- und Bef
   - Tastaturnavigation (Pfeiltasten, Enter) (Umgesetzt)
 
 ## 3. Besondere Herausforderungen & Lösungen
-- **Performance bei der Suche:** Caching-Service (Gelöst)
+- **Performance bei der Suche:** Caching-Service mit RediSearch (Gelöst)
 - **Durchsuchen von Logs:** Globale Suche durchsucht keine Logs, Verweis auf dedizierte Ansicht (Design-Entscheidung, umgesetzt)
-- **Relevanz der Ergebnisse:** Priorisierungslogik (Gelöst)
-- **Infix-Suche:** Indexierung aller Substrings (Gelöst)
+- **Relevanz der Ergebnisse:** Priorisierungslogik durch RediSearch (Gelöst)
+- **Infix-Suche:** Indexierung aller Substrings (Ersetzt durch RediSearch-Volltextsuche)
 
 ## 4. Umsetzungsplan (Phasen)
 - **Phase 0: Infrastruktur & Caching** (Abgeschlossen)
@@ -52,12 +52,12 @@ Dieses Dokument listet den Status der Implementierung der globalen Such- und Bef
 - **Phase 4: Verfeinerung & UX-Verbesserungen** (Abgeschlossen)
   - Tastaturnavigation (Umgesetzt)
   - Relevanz-Sortierung (Umgesetzt)
-  - UI-Feedback (Ladeindikatoren, Erfolgs-/Fehlermeldungen) (Teilweise umgesetzt, kann verbessert werden)
+  - UI-Feedback (Ladeindikatoren, Erfolgs-/Fehlermeldungen) (Umgesetzt)
   - Befehls- und Ziel-Autocomplete (Umgesetzt)
 
 ## Offene Punkte / Nächste Schritte
 - **Fehlerbehebung:** Aktuelle Regression beheben (Suche/Commands funktionieren nicht mehr). (Gelöst)
-- **UI-Feedback:** Detailliertere Ladeindikatoren und Statusmeldungen im Frontend.
+- **UI-Feedback:** Detailliertere Ladeindikatoren und Statusmeldungen im Frontend. (Umgesetzt)
 - **Weitere Befehle:** Implementierung weiterer Docker-Befehle (z.B. `remove`, `inspect`).
 - **Image-Aktionen:** Aktionen für Images (z.B. `pull`, `remove`).
 - **Detailseiten-Links:** Sicherstellen, dass Links zu Detailseiten korrekt funktionieren.

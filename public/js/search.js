@@ -37,7 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
+    const showLoadingIndicator = (container, message) => {
+        container.innerHTML = `<div class="p-4 text-gray-400">${message}</div>`;
+    };
+
     const executeCommand = async (command, target) => {
+        showLoadingIndicator(searchResultsContainer, `Executing '${command}' on '${target}'...`);
+        commandSuggestionsContainer.innerHTML = '';
+
         try {
             const response = await fetch('/api/command', {
                 method: 'POST',
@@ -46,8 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const result = await response.json();
             if (!response.ok) throw new Error(result.error || 'Command failed');
-            searchResultsContainer.innerHTML = `<div class="p-4 text-green-400">${result.message}</div>`;
-            commandSuggestionsContainer.innerHTML = '';
+            searchResultsContainer.innerHTML = `<div class="p-4 text-green-400">Success: ${result.message}</div>`;
             setTimeout(() => {
                 searchModal.style.display = 'none';
                 searchInput.value = '';
@@ -79,12 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
         suggestionIndex = -1;
 
         if (commandNames.includes(command) && value.includes(' ')) {
-            // Scenario: Typing a command target
-            commandSuggestionsContainer.innerHTML = ''; // Clear command suggestions
-            searchResultsContainer.innerHTML = ''; // Clear search results
-            performSearch(targetPart, 'Container', true); // Suggest targets
+            commandSuggestionsContainer.innerHTML = '';
+            searchResultsContainer.innerHTML = '';
+            performSearch(targetPart, 'Container', true);
         } else {
-            // Scenario: Typing a command name or a general search query
             if (parts.length === 1 && !value.endsWith(' ')) {
                 renderCommandSuggestions(value);
             } else {
@@ -95,11 +99,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const performSearch = async (query, type = null, isSuggestion = false) => {
+        const container = isSuggestion ? commandSuggestionsContainer : searchResultsContainer;
         if (!isSuggestion && query.length < 2) {
-            searchResultsContainer.innerHTML = '';
+            container.innerHTML = '';
             currentResults = [];
             return;
         }
+
+        showLoadingIndicator(container, 'Searching...');
 
         try {
             const response = await fetch('/api/search', {
@@ -117,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error(`Search failed: ${error.message}`);
-            searchResultsContainer.innerHTML = `<div class="p-4 text-red-400">Error: ${error.message}</div>`;
+            container.innerHTML = `<div class="p-4 text-red-400">Error: ${error.message}</div>`;
         }
     };
 
@@ -142,6 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
         currentResults = [];
         let html = '<ul class="p-2">';
         let itemIndex = 0;
+        if (Object.keys(groups).length === 0) {
+            commandSuggestionsContainer.innerHTML = '<div class="p-4 text-gray-400">No matching containers found.</div>';
+            return;
+        }
         for (const groupName in groups) {
             for (const item of groups[groupName]) {
                 currentResults.push(item);
