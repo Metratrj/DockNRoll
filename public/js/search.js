@@ -76,24 +76,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetPart = parts.slice(1).join(' ');
         const commandNames = knownCommands.map(c => c.name);
 
-        // Reset suggestions
         suggestionIndex = -1;
 
-        // Show command suggestions if the user is typing a single word
-        if (parts.length === 1 && !value.endsWith(' ')) {
-            renderCommandSuggestions(value);
-        } else {
-            commandSuggestionsContainer.innerHTML = '';
-        }
-
-        // Decide on the main action: suggest targets or perform a general search
         if (commandNames.includes(command) && value.includes(' ')) {
-            // A known command is typed, followed by a space, so suggest targets (containers)
-            searchResultsContainer.innerHTML = ''; // Clear main results when suggesting targets
-            performSearch(targetPart, 'Container', true);
+            // Scenario: Typing a command target
+            commandSuggestionsContainer.innerHTML = ''; // Clear command suggestions
+            searchResultsContainer.innerHTML = ''; // Clear search results
+            performSearch(targetPart, 'Container', true); // Suggest targets
         } else {
-            // This is a general search
-            commandSuggestionsContainer.innerHTML = ''; // Clear command suggestions for general search
+            // Scenario: Typing a command name or a general search query
+            if (parts.length === 1 && !value.endsWith(' ')) {
+                renderCommandSuggestions(value);
+            } else {
+                commandSuggestionsContainer.innerHTML = '';
+            }
             performSearch(value, null, false);
         }
     };
