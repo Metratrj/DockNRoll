@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Http\Request;
 use App\Http\Response;
 use Predis\Client as RedisClient;
 
 class SearchController
 {
     private RedisClient $redis;
+    private const INDEX_NAME = 'docknroll_idx';
 
     public function __construct()
     {
@@ -26,46 +26,57 @@ class SearchController
             $query = strtolower(trim($requestBody['query'] ?? ''));
             $typeFilter = $requestBody['type'] ?? null;
 
-            $itemKeys = [];
+            $queryString = '';
 
             if (empty($query)) {
-                if ($typeFilter) {
-                    // If query is empty but a type is specified, return all items of that type
-                    $itemKeys = $this->redis->smembers('index:type:' . strtolower($typeFilter));
-                } else {
-                    (new Response())->json([]);
-                    return;
-                }
+                $queryString = '*';
             } else {
-                $tokens = preg_split('/[\s_.-:]+/', $query);
-                $tokens = array_filter($tokens, fn($t) => !empty($t));
-
-                if (empty($tokens)) {
-                    (new Response())->json([]);
-                    return;
-                }
-
-                $indexKeys = array_map(fn($t) => 'index:term:' . $t, $tokens);
-                $itemKeys = $this->redis->sinter($indexKeys);
+                $queryString = "@fulltext:{$query}* | @name|repoTags|id:{$query}*";
             }
+
+            if ($typeFilter) {
+                $queryString = trim("({$queryString}) @type:{".strtolower($typeFilter)."}");
+            }
+
+            $rawResult = $this->redis->executeRaw([
+                'FT.SEARCH',
+                self::INDEX_NAME,
+                $queryString,
+                'RETURN', 1, '$'
+            ]);
 
             $results = [
                 'Container' => [],
                 'Image' => [],
             ];
 
-            foreach ($itemKeys as $itemKey) {
-                $data = $this->redis->hgetall($itemKey);
-                if (str_starts_with($itemKey, 'container:')) {
-                    if ($typeFilter && strtolower($typeFilter) !== 'container') continue;
-                    $data['type'] = 'Container';
-                    $data['actions'] = $this->getContainerActions($data['state'] ?? '');
-                    $results['Container'][] = $data;
-                } elseif (str_starts_with($itemKey, 'image:')) {
-                    if ($typeFilter && strtolower($typeFilter) !== 'image') continue;
-                    $data['type'] = 'Image';
-                    $data['actions'] = []; // No actions for images yet
-                    $results['Image'][] = $data;
+            $count = $rawResult[0];
+            for ($i = 1; $i < count($rawResult); $i += 2) {
+                $docJson = $rawResult[$i + 1][1];
+                $doc = json_decode($docJson, true);
+                $fullObject = $doc['full_object'];
+                $type = $doc['type'];
+
+                if ($type === 'Container') {
+                    $formattedItem = [
+                        'id' => $fullObject['Id'],
+                        'name' => ltrim($fullObject['Names'][0] ?? '', '/'),
+                        'image' => $fullObject['Image'],
+                        'state' => $fullObject['State'],
+                        'status' => $fullObject['Status'],
+                        'type' => 'Container',
+                        'actions' => $this->getContainerActions($fullObject['State'] ?? '')
+                    ];
+                    $results['Container'][] = $formattedItem;
+                } elseif ($type === 'Image') {
+                    $formattedItem = [
+                        'id' => $fullObject['Id'],
+                        'repoTags' => implode(', ', $fullObject['RepoTags'] ?? []),
+                        'size' => $fullObject['Size'],
+                        'type' => 'Image',
+                        'actions' => []
+                    ];
+                    $results['Image'][] = $formattedItem;
                 }
             }
 
@@ -90,18 +101,5 @@ class SearchController
             return ['start'];
         }
         return [];
-    }
-
-    public function debugKey(Request $request, Response $response, string $key): void
-    {
-        try {
-            $members = $this->redis->smembers($key);
-            (new Response())->json($members);
-        } catch (\Exception $e) {
-            (new Response())->setStatus(500)->json([
-                'error' => 'Failed to query Redis key.',
-                'message' => $e->getMessage()
-            ]);
-        }
     }
 }
