@@ -32,6 +32,27 @@ class ContainerController
         View::render("containers/show", ["stats" => $stats]);
     }
 
+    public function statsStream(Request $request, Response $response, string $id): void
+    {
+        $stream = $this->service->containerStatsStream($id);
+
+        $response
+          ->setHeader("Content-Type", "text/event-stream")
+          ->setHeader("Cache-Control", "no-cache")
+          ->setHeader("Connection", "keep-alive")
+          ->sendHeaders();
+
+        while (!$stream->eof()) {
+            $line = $stream->read(1024);
+            if (empty($line)) {
+                continue;
+            }
+            echo "data: " . $line . "\n\n";
+            ob_flush();
+            flush();
+        }
+    }
+
     public function start(Request $request, Response $response, string $id): void
     {
         $this->service->containerStart($id);
