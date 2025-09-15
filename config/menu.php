@@ -5,12 +5,16 @@
  */
 
 return [
-    [
-        "label" => "Dashboard",
-        "path" => "/",
-    ],
-    [
-        "label" => "Containers",
-        "path" => "/containers",
-    ],
+  [
+    "label" => "Dashboard",
+    "path" => "/",
+  ],
+  [
+    "label" => "Containers",
+    "path" => "/containers",
+  ],
+  [
+    "label" => "Images",
+    "path" => "/images",
+  ],
 ];

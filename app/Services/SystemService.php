@@ -20,8 +20,8 @@ class SystemService
     public function __construct(string $host = "http://localhost:2375")
     {
         $guzzle = new Client([
-            "base_uri" => $host,
-            "timeout" => 5,
+          "base_uri" => $host,
+          "timeout" => 5,
         ]);
         $config = Configuration::getDefaultConfiguration()->setHost($host);
         $this->service = new SystemApi($guzzle, $config);

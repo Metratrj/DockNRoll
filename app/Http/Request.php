@@ -16,7 +16,8 @@ class Request
         public array $files,
         public array $cookie,
         public array $server,
-    ) {}
+    ) {
+    }
 
     public function getMethod(): string
     {
@@ -36,14 +37,6 @@ class Request
 
     public static function createFromGlobals()
     {
-        return new static(
-            $_SERVER["REQUEST_URI"],
-            $_SERVER["REQUEST_METHOD"],
-            $_GET,
-            $_POST,
-            $_FILES,
-            $_COOKIE,
-            $_SERVER,
-        );
+        return new static($_SERVER["REQUEST_URI"], $_SERVER["REQUEST_METHOD"], $_GET, $_POST, $_FILES, $_COOKIE, $_SERVER);
     }
 }

@@ -23,15 +23,15 @@ class DashboardController
         $sysdatainfo = $this->service->systemDataUsage();
 
         $stats = [
-            "containers_running" => $sysinfo->getContainersRunning(),
-            "images" => $sysinfo->getImages(),
-            "volumes" => count($sysdatainfo->getVolumes()),
-            "audit_logs" => 42,
+          "containers_running" => $sysinfo->getContainersRunning(),
+          "images" => $sysinfo->getImages(),
+          "volumes" => count($sysdatainfo->getVolumes()),
+          "audit_logs" => 42,
         ];
 
         View::render("dashboard/index", [
-            "title" => "Dashboard",
-            "stats" => $stats,
+          "title" => "Dashboard",
+          "stats" => $stats,
         ]);
     }
 }
