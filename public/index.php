@@ -6,6 +6,7 @@
 
 use App\Controllers\ContainerController;
 use App\Controllers\DashboardController;
+use App\Controllers\ImageController;
 use App\Http\Request;
 use App\Http\Response;
 use App\Http\Router;
@@ -22,6 +23,10 @@ $router->get("/containers", [ContainerController::class, "index"]);
 $router->get("/containers/{id}", [ContainerController::class, "show"]);
 $router->post("/containers/{id}/start", [ContainerController::class, "start"]);
 $router->post("/containers/{id}/stop", [ContainerController::class, "stop"]);
+$router->get("/containers/{id}/stats", [ContainerController::class, "statsStream"]);
+
+$router->get("/images", [ImageController::class, "index"]);
+$router->get("/images/search", [ImageController::class, "search"]);
 
 // Dispatch
 $request = Request::createFromGlobals();
