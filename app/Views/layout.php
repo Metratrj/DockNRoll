@@ -132,9 +132,14 @@ $current_path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
     </div>
 
     <!-- Search Modal -->
-    <div id="search-modal" class="fixed inset-0 z-[10000] flex items-start justify-center bg-black/50 backdrop-blur-sm hidden pt-20">
-        <div id="search-results" class="w-full max-w-2xl bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
-            <!-- Results will be injected here -->
+    <div id="search-modal" class="fixed inset-0 z-[10000] flex items-start justify-center bg-black/50 backdrop-blur-sm pt-20" style="display: none;">
+        <div class="w-full max-w-2xl">
+            <div id="command-suggestions" class="w-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg mb-2 overflow-hidden">
+                <!-- Command suggestions will be injected here -->
+            </div>
+            <div id="search-results" class="w-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
+                <!-- Results will be injected here -->
+            </div>
         </div>
     </div>
 
