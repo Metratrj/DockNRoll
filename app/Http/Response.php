@@ -11,6 +11,7 @@ class Response
     private string $body = "";
     private array $headers = [];
     private int $status = 0;
+    private bool $headers_send = false;
 
     public function setStatus(int $status): self
     {
@@ -63,10 +64,18 @@ class Response
         if ($this->status) {
             http_response_code($this->status);
         }
-        foreach ($this->headers as $header => $value) {
-            header("$header: $value");
-        }
+        $this->sendHeaders();
 
         echo $this->body;
+    }
+
+    public function sendHeaders(): void
+    {
+        if (!$this->headers_send) {
+            foreach ($this->headers as $header => $value) {
+                header("$header: $value");
+            }
+            $this->headers_send = true;
+        }
     }
 }
