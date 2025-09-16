@@ -4,11 +4,11 @@
  * Copyright (c) 2025.
  */
 
+use App\Controllers\CommandController;
 use App\Controllers\ContainerController;
 use App\Controllers\DashboardController;
 use App\Controllers\ImageController;
 use App\Controllers\SearchController;
-use App\Controllers\CommandController;
 use App\Http\Request;
 use App\Http\Response;
 use App\Http\Router;
@@ -29,6 +29,8 @@ $router->get("/containers/{id}/stats", [ContainerController::class, "statsStream
 
 $router->get("/images", [ImageController::class, "index"]);
 $router->get("/images/search", [ImageController::class, "search"]);
+$router->get("/images/rows", [ImageController::class, "rows"]);
+$router->get("/images/{id}", [ImageController::class, "show"]);
 
 // Search & Command API
 $router->post("/api/search", [SearchController::class, "search"]);
