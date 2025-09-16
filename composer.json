@@ -1,6 +1,7 @@
 {
   "name": "metratrj/dock-n-roll",
   "description": "Minimal Docker Management Tool in PHP",
+  "version": "1.0.0",
   "repositories": [{
     "type": "path",
     "url": "app/External/docker-php-client",
@@ -13,7 +14,8 @@
     "php": "^8.2",
     "guzzlehttp/guzzle": "^7.10",
     "guzzlehttp/psr7": "^2.8",
-    "metratrj/docker-php-client": "1.0.0"
+    "metratrj/docker-php-client": "1.0.0",
+    "predis/predis": "^3.2"
   },
   "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.87"
@@ -21,7 +23,7 @@
   "autoload": {
     "psr-4": {
       "App\\": "app/",
-      "DockerClient\\": "app/External/docker-php-client/lib/"
+      "OpenAPI\\Client\\": "app/External/docker-php-client/lib/"
     }
   },
   "scripts": {

@@ -1,7 +1,12 @@
 <?php
 
+/*
+ * Copyright (c) 2025.
+ */
+
 namespace App\Controllers;
 
+use App\Http\Request;
 use App\Http\Response;
 use App\Services\ContainerService;
 use Predis\Client as RedisClient;
@@ -10,25 +15,25 @@ class CommandController
 {
     private RedisClient $redis;
     private ContainerService $containerService;
+    private const INDEX_NAME = "docknroll_idx";
 
     public function __construct()
     {
         $this->redis = new RedisClient([
-            'scheme' => 'tcp',
-            'host'   => 'localhost',
-            'port'   => 6379,
+            "scheme" => "tcp",
+            "host" => "localhost",
+            "port" => 6379,
         ]);
         $this->containerService = new ContainerService();
     }
 
-    public function execute(): void
+    public function execute(Request $request, Response $response): void
     {
-        $requestBody = json_decode(file_get_contents('php://input'), true);
-        $command = $requestBody['command'] ?? null;
-        $targetName = $requestBody['target'] ?? null;
+        $command = $request->body["command"] ?? null;
+        $targetName = $request->body["target"] ?? null;
 
         if (!$command || !$targetName) {
-            (new Response())->setStatus(400)->json(['error' => 'Command and target are required.']);
+            $response->setStatus(400)->json(["error" => "Command and target are required."]);
             return;
         }
 
@@ -36,71 +41,85 @@ class CommandController
             $targetId = $this->findContainerIdByName($targetName);
 
             if (!$targetId) {
-                (new Response())->setStatus(404)->json(['error' => "Container '{$targetName}' not found."]);
+                $response->setStatus(404)->json(["error" => "Container '{$targetName}' not found."]);
                 return;
             }
 
             switch ($command) {
-                case 'start':
+                case "start":
                     $this->containerService->containerStart($targetId);
                     $message = "Container {$targetName} started successfully.";
                     break;
-                case 'stop':
+                case "stop":
                     $this->containerService->containerStop($targetId);
                     $message = "Container {$targetName} stopped successfully.";
                     break;
                 default:
-                    (new Response())->setStatus(400)->json(['error' => "Unknown command '{$command}'."]);
+                    $response->setStatus(400)->json(["error" => "Unknown command '{$command}'."]);
                     return;
             }
 
-            (new Response())->json(['status' => 'success', 'message' => $message]);
-
+            $response->json(["status" => "success", "message" => $message]);
         } catch (\Exception $e) {
-            (new Response())->setStatus(500)->json([
-                'error' => 'An error occurred while executing the command.',
-                'message' => $e->getMessage()
+            $response->setStatus(500)->json([
+                "error" => "An error occurred while executing the command.",
+                "message" => $e->getMessage(),
             ]);
         }
     }
 
     private function findContainerIdByName(string $name): ?string
     {
-        // Sanitize name similar to how it's indexed
-        $sanitizedName = strtolower(ltrim($name, '/'));
+        $sanitizedName = strtolower(ltrim($name, "/"));
 
-        // We search for the full, sanitized name as a token
-        $indexKey = "index:term:" . $sanitizedName;
-        $itemKeys = $this->redis->smembers($indexKey);
+        // Prepare the name for RediSearch text query
+        $queryName = preg_replace('/([\\\\\.<>{}[\]":;!@#$%^&*()\-+=~])/', '\\\\$1', $sanitizedName);
 
-        $foundContainerId = null;
-        $count = 0;
+        $queryString = "(@nametag:{" . $queryName . "} @type:{container})";
 
-        foreach ($itemKeys as $itemKey) {
-            if (str_starts_with($itemKey, 'container:')) {
-                // Additionally, check if the name is an exact match
-                $redisName = ltrim($this->redis->hget($itemKey, 'name'), '/');
-                if ($redisName === $sanitizedName) {
-                    $foundContainerId = str_replace('container:', '', $itemKey);
-                    $count++;
+        try {
+            $rawResult = $this->redis->executeRaw(["FT.SEARCH", self::INDEX_NAME, $queryString, "RETURN", 1, '$']);
+
+            $count = $rawResult[0];
+            if ($count == 0) {
+                return null;
+            }
+
+            $foundContainerId = null;
+            $exactMatchCount = 0;
+
+            for ($i = 1; $i < count($rawResult); $i += 2) {
+                $docJson = $rawResult[$i + 1][1];
+                $doc = json_decode($docJson, true);
+                $fullObject = $doc["full_object"] ?? null;
+
+                if ($fullObject && !empty($fullObject["Names"])) {
+                    foreach ($fullObject["Names"] as $containerName) {
+                        if (strtolower(ltrim($containerName, "/")) === $sanitizedName) {
+                            $foundContainerId = $fullObject["Id"];
+                            $exactMatchCount++;
+                            break;
+                        }
+                    }
                 }
             }
-        }
 
-        // Only return an ID if we found exactly one match
-        if ($count === 1) {
-            return $foundContainerId;
+            if ($exactMatchCount === 1) {
+                return $foundContainerId;
+            }
+        } catch (\Exception $e) {
+            return null;
         }
 
         return null;
     }
 
-    public function getCommands(): void
+    public function getCommands(Request $request, Response $response): void
     {
         $commands = [
-            ['name' => 'start', 'description' => 'Start a container.'],
-            ['name' => 'stop', 'description' => 'Stop a container.'],
+            ["name" => "start", "description" => "Start a container."],
+            ["name" => "stop", "description" => "Stop a container."],
         ];
-        (new Response())->json($commands);
+        $response->json($commands);
     }
 }
