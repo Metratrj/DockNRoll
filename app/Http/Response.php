@@ -10,7 +10,7 @@ class Response
 {
     private string $body = "";
     private array $headers = [];
-    private int $status = 0;
+    private int $status = 200;
     private bool $headers_send = false;
 
     public function setStatus(int $status): self
@@ -55,7 +55,7 @@ class Response
     public function json(array $data): void
     {
         $this->setHeader("Content-Type", "application/json");
-        $this->setBody(json_encode($data));
+        $this->setBody(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $this->send();
     }
 

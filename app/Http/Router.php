@@ -6,10 +6,6 @@
 
 namespace App\Http;
 
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-
 class Router
 {
     private array $routes = [];
