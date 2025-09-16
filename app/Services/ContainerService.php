@@ -23,8 +23,8 @@ class ContainerService
     public function __construct(string $host = "http://localhost:2375")
     {
         $this->guzzle = new Client([
-          "base_uri" => $host,
-          "timeout" => 0,
+            "base_uri" => $host,
+            "timeout" => 0,
         ]);
         $config = Configuration::getDefaultConfiguration()->setHost($host);
         $this->service = new ContainerApi($this->guzzle, $config);
