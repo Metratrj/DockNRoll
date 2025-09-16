@@ -36,7 +36,7 @@ $current_path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
             </div>
             <ul class="mb-6 flex flex-col gap-4">
               <?php foreach ($menu as $item) {
-                  $activeClass = $current_path == $item["path"] ? "menu-item-active" :
+                  $activeClass = $current_path === $item["path"] ? "menu-item-active" :
                   "menu-item-inactive";
                   echo sprintf('
               <li>
@@ -130,5 +130,19 @@ $current_path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
         </main>
       </div>
     </div>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="fixed inset-0 z-[10000] flex items-start justify-center bg-black/50 backdrop-blur-sm pt-20" style="display: none;">
+        <div class="w-full max-w-2xl">
+            <div id="command-suggestions" class="w-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg mb-2 overflow-hidden">
+                <!-- Command suggestions will be injected here -->
+            </div>
+            <div id="search-results" class="w-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
+                <!-- Results will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/search.js"></script>
   </body>
 </html>

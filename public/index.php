@@ -7,6 +7,8 @@
 use App\Controllers\ContainerController;
 use App\Controllers\DashboardController;
 use App\Controllers\ImageController;
+use App\Controllers\SearchController;
+use App\Controllers\CommandController;
 use App\Http\Request;
 use App\Http\Response;
 use App\Http\Router;
@@ -27,6 +29,11 @@ $router->get("/containers/{id}/stats", [ContainerController::class, "statsStream
 
 $router->get("/images", [ImageController::class, "index"]);
 $router->get("/images/search", [ImageController::class, "search"]);
+
+// Search & Command API
+$router->post("/api/search", [SearchController::class, "search"]);
+$router->post("/api/command", [CommandController::class, "execute"]);
+$router->get("/api/commands", [CommandController::class, "getCommands"]);
 
 // Dispatch
 $request = Request::createFromGlobals();
