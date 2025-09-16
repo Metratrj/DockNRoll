@@ -20,16 +20,16 @@ class ContainerController
         $this->service = $service;
     }
 
-    public function index(): void
+    public function index(Request $request, Response $response, View $view): string
     {
         $containers = $this->service->containerList();
-        View::render("containers/list", ["containers" => $containers]);
+        return $view->render("containers/list", ["containers" => $containers]);
     }
 
-    public function show(Request $request, Response $response, string $id): void
+    public function show(Request $request, Response $response, View $view, string $id): string
     {
         $container = $this->service->containerInspect($id);
-        View::render("containers/show", ["container" => $container]);
+        return $view->render("containers/show", ["container" => $container]);
     }
 
     public function statsStream(Request $request, Response $response, string $id): void

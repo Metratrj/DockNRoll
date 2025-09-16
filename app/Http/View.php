@@ -4,17 +4,29 @@ namespace App\Http;
 
 class View
 {
-    public static function render(string $template, array $data = []): void
+    private string $basePath;
+
+    public function __construct(string $basePath)
     {
-        extract($data, EXTR_SKIP);
-        $view_file = __DIR__ . "/../Views/{$template}.php";
+        $this->basePath = rtrim($basePath, '/');
+    }
+
+    public function render(string $template, array $data = []): string
+    {
+        $view_file = "{$this->basePath}/{$template}.php";
+        $layoutFile = "{$this->basePath}/layout.php";
 
         if (!file_exists($view_file)) {
-            http_response_code(500);
-            echo "View file {$view_file} not found";
-            return;
+            throw new \InvalidArgumentException("View file not found: {$view_file}");
         }
 
-        include __DIR__ . "/../Views/layout.php";
+        if (!file_exists($layoutFile)) {
+            throw new \InvalidArgumentException("Layout file not found: {$layoutFile}");
+        }
+
+        ob_start();
+        extract($data, EXTR_SKIP);
+        include $layoutFile; // This will in turn include the $view_file
+        return ob_get_clean();
     }
 }

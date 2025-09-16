@@ -6,6 +6,8 @@
 
 namespace App\Controllers;
 
+use App\Http\Request;
+use App\Http\Response;
 use App\Http\View;
 use App\Services\SystemService;
 
@@ -17,7 +19,7 @@ class DashboardController
         $this->service = $service;
     }
 
-    public function index(): void
+    public function index(Request $request, Response $response, View $view): string
     {
         $sysinfo = $this->service->systemInfo();
         $sysdatainfo = $this->service->systemDataUsage();
@@ -29,7 +31,7 @@ class DashboardController
             "audit_logs" => 42,
         ];
 
-        View::render("dashboard/index", [
+        return $view->render("dashboard/index", [
             "title" => "Dashboard",
             "stats" => $stats,
         ]);

@@ -35,9 +35,11 @@ class Router
         $method = $request->getMethod();
         $uri = $request->getPath();
 
+        $view = new View(__DIR__ . '/../Views');
+
         if (isset($this->routes[$method][$uri])) {
             $handler = $this->routes[$method][$uri];
-            $this->invokeHandler($handler, $request, $response);
+            $this->invokeHandler($handler, $request, $response, $view);
             return;
         }
 
@@ -45,7 +47,7 @@ class Router
             $pattern = "@^" . preg_replace("/\{([a-zA-Z0-9_]+)\}/", '(?P<$1>[^/]+)', $route) . "$@";
             if (preg_match($pattern, $uri, $matches)) {
                 $params = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
-                $this->invokeHandler($handler, $request, $response, $params);
+                $this->invokeHandler($handler, $request, $response, $view, $params);
                 return;
             }
         }
@@ -54,14 +56,16 @@ class Router
         $response->setStatus(404)->setBody("404 Not Found")->send();
     }
 
-    private function invokeHandler($handler, Request $req, Response $res, array $params = []): void
+    private function invokeHandler($handler, Request $req, Response $res, View $view, array $params = []): void
     {
         if (is_array($handler)) {
             [$class, $method] = $handler;
             $controller = new $class();
-            $controller->$method($req, $res, ...array_values($params));
+            $responseBody = $controller->$method($req, $res, $view, ...array_values($params));
+            $res->setBody($responseBody)->send();
         } elseif (is_callable($handler)) {
-            $handler($req, $res, ...array_values($params));
+            $responseBody = $handler($req, $res, $view, ...array_values($params));
+            $res->setBody($responseBody)->send();
         }
     }
 }
