@@ -41,3 +41,4 @@ $router->get("/api/commands", [CommandController::class, "getCommands"]);
 $request = Request::createFromGlobals();
 $response = new Response();
 $router->dispatch($request, $response);
+$response->send();

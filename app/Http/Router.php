@@ -53,7 +53,7 @@ class Router
         }
 
         // Not found
-        $response->setStatus(404)->setBody("404 Not Found")->send();
+        $response->setStatus(404)->setBody("404 Not Found");
     }
 
     private function invokeHandler($handler, Request $req, Response $res, View $view, array $params = []): void
@@ -62,10 +62,10 @@ class Router
             [$class, $method] = $handler;
             $controller = new $class();
             $responseBody = $controller->$method($req, $res, $view, ...array_values($params));
-            $res->setBody($responseBody)->send();
+            $res->setBody($responseBody);
         } elseif (is_callable($handler)) {
             $responseBody = $handler($req, $res, $view, ...array_values($params));
-            $res->setBody($responseBody)->send();
+            $res->setBody($responseBody);
         }
     }
 }
