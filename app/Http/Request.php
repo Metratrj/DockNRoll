@@ -16,27 +16,36 @@ class Request
         public array $files,
         public array $cookie,
         public array $server,
-    ) {
-    }
+        public array $body,
+    ) {}
 
     public function getMethod(): string
     {
-        return $_SERVER["REQUEST_METHOD"] ?? "GET";
+        return $this->method ?? "GET";
     }
 
     public function getPath(): string
     {
-        $uri = parse_url($_SERVER["REQUEST_URI"] ?? "/", PHP_URL_PATH);
+        $uri = parse_url($this->uri ?? "/", PHP_URL_PATH);
         return rtrim($uri, "/") ?: "/";
     }
 
     public function input(string $key, mixed $default = null): mixed
     {
-        return $_POST[$key] ?? ($_GET[$key] ?? $default);
+        return $this->post[$key] ?? ($this->get[$key] ?? $default);
     }
 
-    public static function createFromGlobals()
+    public static function createFromGlobals(): static
     {
-        return new static($_SERVER["REQUEST_URI"], $_SERVER["REQUEST_METHOD"], $_GET, $_POST, $_FILES, $_COOKIE, $_SERVER);
+        return new static(
+            $_SERVER["REQUEST_URI"],
+            $_SERVER["REQUEST_METHOD"],
+            $_GET,
+            $_POST,
+            $_FILES,
+            $_COOKIE,
+            $_SERVER,
+            json_decode(file_get_contents("php://input"), true) ?? [],
+        );
     }
 }
