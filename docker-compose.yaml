@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+    app:
+        build: .
+        ports:
+            - "8000:80"
+        restart: unless-stopped
+        depends_on:
+            - db
+            - redis
+        environment:
+            - DB_HOST=db
+            - DB_PORT=3306
+            - DB_DATABASE=docknroll
+            - DB_USERNAME=docknroll
+            - DB_PASSWORD=secret
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+        networks:
+            - docknroll-net
+
+    db:
+        image: mariadb:10.5
+        restart: unless-stopped
+        environment:
+            MARIADB_ROOT_PASSWORD: root_password
+            MARIADB_DATABASE: docknroll
+            MARIADB_USER: docknroll
+            MARIADB_PASSWORD: secret
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - docknroll-net
+
+    redis:
+        image: redis:6-alpine
+        restart: unless-stopped
+        volumes:
+            - redis_data:/data
+        networks:
+            - docknroll-net
+
+volumes:
+    db_data:
+    redis_data:
+
+networks:
+    docknroll-net:
