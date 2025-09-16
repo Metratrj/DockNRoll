@@ -94,3 +94,14 @@ dist
 .pnp.*
 docker
 public/assets
+
+# Project-specific ignores
+.php-cs-fixer.cache
+.phpunit.result.cache
+.vscode/
+
+# Build artifacts
+public/css/out.css
+
+# Project documentation
+GEMINI.md
